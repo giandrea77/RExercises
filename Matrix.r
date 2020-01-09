@@ -1,3 +1,15 @@
+# 
+# Don't complain; just work harder! Dan Stanford
+# 
+# Our responsibility is to do what we can, learn what we can, improve the solutions, and pass them on. RF
+# 
+# @author: me@andreagirardi.it
+# @since: Wed Jan  8 19:11:27 CET 2020
+# @project: RExercises
+# @module: Matrix lesson
+# @desc: 
+#
+#
 # Exercises
 
 A <- c(1, 2, 3)

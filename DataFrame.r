@@ -1,3 +1,16 @@
+# 
+# Don't complain; just work harder! Dan Stanford
+# 
+# Our responsibility is to do what we can, learn what we can, improve the solutions, and pass them on. RF
+# 
+# @author: me@andreagirardi.it
+# @since: Wed Jan  8 19:11:27 CET 2020
+# @project: RExercises
+# @module: Data Frame lesson
+# @desc: 
+#
+#
+
 # Recreate the following dataframe by creating vectors and using the data.frame function:
 
 > Age <- c(22, 25, 26)
