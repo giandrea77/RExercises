@@ -71,6 +71,10 @@ Valiant           18.1 105
    avg_mpg
 1 20.09062
 
+> mtcars %>% filter(cyl == 6) %>% summarise(avg_hp = mean(hp))
+    avg_hp
+1 122.2857
+
 # Use pipe operators to get the mean hp value for cars with 6 cylinders.
 > mtcars %>% filter(cyl == 6) %>% summarise(avg_mpg = mean(hp))
    avg_mpg
