@@ -64,4 +64,53 @@
 > select(batting, playerID, yearID, H, AB, BA, OBP, SLG) %>% filter(SLG > 0 & SLG < 1) %>% arrange(desc(SLG)) %>% head(5) 
 
 # Merging Salary Data with Batting Data
-> select(salaries, playerID, teamID, year, salary) %>% arrange(desc(salary)) %>% head(5) 
+> select(salaries, playerID, teamID, yearID, salary) %>% arrange(desc(salary)) %>% head(5) 
+
+# reassign batting to only contain data from 1985 and onwards
+> salaries <- subset(salaries, yearID >= 1985)
+> batting <- subset(batting, yearID >= 1985)
+
+# Merge the batting and sal data frames by c('playerID','yearID')
+> combo <- merge(batting, salaries, by = c('playerID', 'yearID'))
+
+# Analyzing the Lost Players
+# Use the subset() function to get a data frame called lost_players from the combo data frame consisting of those 3 players. 
+# Hint: Try to figure out how to use %in% to avoid a bunch of or statements!
+> lostPlayer <- subset(combo, playerID %in% c('giambja01', 'saenzol01', 'damonjo01'))
+
+# Use subset again to only grab the rows where the yearID was 2001.
+> lostPlayer <- subset(lostPlayer, yearID %in% c('2001'))
+> lostPlayer <- select(lostPlayer, playerID, H, X2B, X3B, HR, OBP, SLG, BA, AB)
+
+# Altenrnative
+# lostPlayer <- lostPlayer[, c('playerID', 'H', 'X2B', 'X3B', 'HR', 'OBP', 'SLG', 'BA', 'AB')]
+
+# Replacement Players
+# Find Replacement Players for the key three players we lost! However, you have three constraints:
+# The total combined salary of the three players can not exceed 15 million dollars.
+# Their combined number of At Bats (AB) needs to be equal to or greater than the lost players.
+# Their mean OBP had to equal to or greater than the mean OBP of the lost players
+# Use the combo dataframe you previously created as the source of information! Remember to just use the 2001 subset of that dataframe. 
+# There's lost of different ways you can do this, so be creative! It should be relatively simple to find 3 players that satisfy the requirements, 
+# note that there are many correct combinations available!
+#
+# Requirements:
+#       1469 AB         486 each
+#       AVG 0.365 OBP
+#       15 millions
+#
+#        playerID   H X2B X3B HR       OBP       SLG        BA  AB
+# 5141  damonjo01 165  34   4  9 0.3235294 0.3633540 0.2562112 644
+# 7878  giambja01 178  47   2 38 0.4769001 0.6596154 0.3423077 520
+# 20114 saenzol01  67  21   1  9 0.2911765 0.3836066 0.2196721 305
+#
+> combo <- subset(combo, yearID == '2001')
+
+> ggplot(combo, aes(x=OBP, y=salary)) + geom_point(size = 10)
+
+# Remove not relevalt or too high payrol (i.e. peopble went on base 0% or 100%)
+> combo <- subset(combo, salary < 8000000 & OBP > 0)
+> combo <- subset(combo, AB >= 450)
+
+# Find replace players
+> select(combo, playerID, OBP, AB) %>% arrange(desc(OBP)) %>% head(10) 
