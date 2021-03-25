@@ -109,8 +109,7 @@
 > ggplot(combo, aes(x=OBP, y=salary)) + geom_point(size = 10)
 
 # Remove not relevalt or too high payrol (i.e. peopble went on base 0% or 100%)
-> combo <- subset(combo, salary < 8000000 & OBP > 0)
-> combo <- subset(combo, AB >= 450)
+> combo <- subset(combo, salary < 8000000 & OBP > 0 &  AB >= 450)
 
 # Find replace players
 > select(combo, playerID, OBP, AB) %>% arrange(desc(OBP)) %>% head(10) 
