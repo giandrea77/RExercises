@@ -12,7 +12,11 @@
 #
 # Exercises
 
-## Standard deviation
+## 
+#### Standard deviation and Geometric mean
+## 
+
+print ('#### Standard deviation and Geometric mean ####')
 temps <- c(32, 32, 31, 28, 29, 31, 39, 32, 32, 35, 26, 29)
 
 mean <- mean(temps)
