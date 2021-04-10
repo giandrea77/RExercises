@@ -37,4 +37,5 @@
 # How to Calcualte R(t)
 # https://github.com/k-sys/covid-19/blob/master/Realtime%20R0.ipynb
 # https://www.scienzainrete.it/articolo/metodo-lo-studio-dellandamento-provinciale-dellepidemia/roberto-battiston/2021-02-03
+# Tutorial : https://www.datacamp.com/community/tutorials/replicating-in-r-covid19 
 # 
