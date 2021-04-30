@@ -56,3 +56,10 @@ titanic_data.groupby('Sex')['Age'].mean()
 # Sex
 # 0    30.505824
 # 1    28.216730
+
+
+### Jaccard Index
+user1 = {1, 2, 3, 4}
+user2 = {2, 5, 6}
+
+jaccardIndex =  len(user1 & user2) / float(len(user1 | user2))

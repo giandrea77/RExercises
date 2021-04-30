@@ -15,8 +15,8 @@ library(dplyr)
 library(xlsx)
 
 # Load ggplot value
-library(ggplot2)
-library(hrbrthemes)
+# library(ggplot2)
+# library(hrbrthemes)
 
 # Global initialization
 aggregateData <- NULL
@@ -82,6 +82,8 @@ extractData <- function(fileName, aggregateData) {
         minSuPopolazione <- NA
     }
 
+    print (paste0(date,' - meanSuPopolazione: ', meanSuPopolazione, ' maxSuPopolazione: ', maxSuPopolazione))
+
     rbind(aggregateData, data.frame(date, casiPostivi, contattoStretto, ricoverato, viaggiatori, scolastici, indEpidemiolgica, positiviSuMille, meanSuPopolazione, maxSuPopolazione, minSuPopolazione)) -> aggregateData
 
     return (aggregateData)
@@ -91,48 +93,15 @@ extractData <- function(fileName, aggregateData) {
 files <- list.files(path="data", pattern="*.xlsx", full.names=TRUE, recursive=FALSE)
 
 for ( fileName in files ) {
-    print (paste0('Extracting data from file: ', fileName))
+    # print (paste0('Extracting data from file: ', fileName))
     extractData(fileName, aggregateData) -> aggregateData
 }
 
-print ('############ ############### ############ ')
-print ('############ AGGREGATED DATA ############ ')
-print ('############ ############### ############ ')
+print ('############ ####################### ############ ')
+print ('############ WRITING AGGREGATED DATA ############ ')
+print ('############ ####################### ############ ')
 
 write.csv(aggregateData,"aggregate.csv", row.names = FALSE)
-
-# https://www.datanovia.com/en/blog/how-to-create-a-ggplot-with-multiple-lines/
-# https://www.r-graph-gallery.com/279-plotting-time-series-with-ggplot2.html
-# 
-ggplot(aggregateData, aes(x = as.Date(date))) +
-    scale_colour_manual(name='', values=c("Numero positivi" = "darkgray", "Positivi su 1000 abitanti" = "steelblue", "Positivi su 1000 abitanti (Provincia)" = "#69b3a2", "Contatti scolastici" = "coral2")) +
-    geom_line(aes(y = casiPostivi, color="Numero positivi")) + 
-    geom_point(aes(y = casiPostivi, color="Numero positivi"), shape=21, fill="#69b3a2", size = 2) + 
-    # stat_smooth(aes(y = casiPostivi), method = "lm", formula = y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5), se = FALSE, color = "lightred", size = 0.7) +   
-    stat_smooth(aes(x = as.Date(date), y = casiPostivi), formula = y ~ x, inherit.aes = FALSE, se = FALSE, color = "darkorange2", size = 0.2) +
-    # geom_smooth(aes(y = casiPostivi), method = "lm", formula = y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5), color = "black", fill = "firebrick")  +
-    # geom_line(aes(y = maxSuPopolazione, color="Max Positivi su 1000 abitanti (Provincia)")) +
-    geom_line(aes(y = scolastici, color="Contatti scolastici")) +
-    geom_line(aes(y = meanSuPopolazione, color="Positivi su 1000 abitanti (Provincia)")) +
-    geom_line(aes(y = positiviSuMille, color = "Positivi su 1000 abitanti")) +
-    scale_x_date(date_breaks = "4 day", date_labels = "%d-%m") +
-    theme_ipsum(plot_margin = margin(30, 30, 30, 30)) +
-    labs(x = "Linea temporale - Anno 2021", y = "Numero casi", title = "Evoluzione contagi COVID19", subtitle = "Comune di Minerbe", caption = "Data source: ULSS9 Scaligera") +
-    theme(
-        axis.text.x = element_text(angle=45, hjust=1, face=3, color="black"), 
-        axis.text.y = element_text(color="black"), 
-        # legend.position=c(-.8500,-.10), 
-        legend.position='top', 
-        legend.justification='left',
-        legend.direction='horizontal',
-        panel.background = element_rect(colour = "black", size = 0.2)        
-    )
-
-
-# Working - out of the script
-# aggregateData <- read.xlsx(file = 'data/20210309_Casi_per_COMUNE.xlsx', 1, startRow = 3, header = TRUE)
-
-# aggregateData <- read.csv(file = 'aggregate.csv') 
 
 
 # Warning messages:
