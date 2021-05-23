@@ -91,7 +91,7 @@ print(timeline_plot)
 # aggregateData <- read.csv(file = '/Users/andrea/Documents/Works/GitHub/RExercises/Covid19/aggregate.csv') 
 
 ggplot(aggregateData, aes(x = as.Date(date))) +
-    scale_colour_manual(name='', values=c("Numero positivi" = "darkgray", "Positivi su 1000 abitanti (Comune)" = "steelblue", "Positivi su 1000 abitanti (Provincia)" = "#69b3a2", "Contatti scolastici" = "coral2")) +
+    scale_colour_manual(name='', values=c("Numero positivi" = "darkgray", "Positivi su 1000 abitanti (Comune di Minerbe)" = "steelblue", "Positivi su 1000 abitanti (Provincia di Verona)" = "#69b3a2", "Contatti scolastici" = "coral2")) +
     geom_line(aes(y = casiPostivi, color="Numero positivi"), size = 1) + 
     geom_point(aes(y = casiPostivi, color="Numero positivi"), shape=21, fill="#69b3a2", size = 2) + 
     # stat_smooth(aes(y = casiPostivi), method = "lm", formula = y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5), se = FALSE, color = "lightred", size = 0.7) +   
@@ -99,8 +99,8 @@ ggplot(aggregateData, aes(x = as.Date(date))) +
     # geom_smooth(aes(y = casiPostivi), method = "lm", formula = y ~ x + I(x^2) + I(x^3) + I(x^4) + I(x^5), color = "black", fill = "firebrick")  +
     # geom_line(aes(y = maxSuPopolazione, color="Max Positivi su 1000 abitanti (Provincia)")) +
     geom_line(aes(y = scolastici, color="Contatti scolastici")) +
-    geom_line(aes(y = meanSuPopolazione, color="Positivi su 1000 abitanti (Provincia)"), size = 1) +
-    geom_line(aes(y = positiviSuMille, color = "Positivi su 1000 abitanti (Comune)"), size = 1) +
+    geom_line(aes(y = meanSuPopolazione, color="Positivi su 1000 abitanti (Provincia di Verona)"), size = 1) +
+    geom_line(aes(y = positiviSuMille, color = "Positivi su 1000 abitanti (Comune di Minerbe)"), size = 1) +
     scale_x_date(date_breaks = "4 day", date_labels = "%d-%m") +
     theme_ipsum(plot_margin = margin(30, 30, 30, 30)) +
     labs(x = "Linea temporale - Anno 2021", y = "Numero casi", title = "Evoluzione contagi COVID19", subtitle = "Comune di Minerbe", caption = "Data source: ULSS9 Scaligera") +
